@@ -116,14 +116,16 @@ cistrstr(const char *s, const char *sub)
 static int
 drawitem(struct item *item, int x, int y, int w)
 {
-	if (item == sel)
+	if (item == sel) {
 		drw_setscheme(drw, scheme[SchemeSel]);
+		drw_rect(drw, x, bh - 2, w, 2, 1, 0);
+	}
 	else if (item->out)
 		drw_setscheme(drw, scheme[SchemeOut]);
 	else
 		drw_setscheme(drw, scheme[SchemeNorm]);
 
-	return drw_text(drw, x, y, w, bh, lrpad / 2, item->text, 0);
+	return drw_text(drw, x, 2, w, bh - 4, lrpad / 2, item->text, 0);
 }
 
 static void
